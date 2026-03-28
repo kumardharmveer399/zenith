@@ -80,11 +80,47 @@ export interface Testimonial {
 }
 
 
+export interface DailyActivity {
+  id: string;
+  name: string;
+  description: string;
+  duration: number; // in minutes
+  time: string;
+  category: 'morning' | 'exercise' | 'meditation' | 'nutrition' | 'evening';
+  benefits: string[];
+}
+
+export interface YogaMeditationDay {
+  day: number;
+  activities: DailyActivity[];
+  focus: string;
+  completed: boolean;
+}
+
+export interface YogaMeditationProgram {
+  id: string;
+  name: string;
+  description: string;
+  duration: number; // days
+  totalDays: number;
+  startDate: string;
+  currentDay: number;
+  completedDays: number;
+  benefits: string[];
+  days: YogaMeditationDay[];
+  overallBenefit: {
+    label: string;
+    timeline: number; // days
+    description: string;
+  };
+}
+
+
 // Mentors Data
 export const mentors: Mentor[] = [
   {
     id: "mentor-1",
-    name: "Dr. Chunchun Mahtha",
+    name: "Chunchun Mahtha",
     title: "Director and Lead Mentor",
     specialty: "Medical & Concept Clarity",
     experience: 3,
@@ -123,6 +159,19 @@ export const mentors: Mentor[] = [
   },
   {
     id: "mentor-4",
+    name: "Jhilli Meher",
+    title: "Career Guidance Mentor",
+    specialty: "Career Guidance After 10th & 12th",
+    experience: 4,
+    rating: 4.8,
+    reviews: 95,
+    image: "/mentors/jhilli.jpeg",
+    bio: "Helps students explore career options after 10th and 12th with practical guidance and real-world insights.",
+    availability: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    classes: ["Class 10", "Class 11", "Class 12"],
+  },
+  {
+    id: "mentor-5",
     name: "Premjeet Murmu",
     title: "Career Guidance Mentor",
     specialty: "Career Guidance After 10th & 12th",
@@ -132,19 +181,6 @@ export const mentors: Mentor[] = [
     image: "/mentors/premjeet.png",
     bio: "Helps students explore career options after 10th and 12th with practical guidance and real-world insights.",
     availability: ["Tuesday", "Thursday", "Saturday"],
-    classes: ["Class 10", "Class 11", "Class 12"],
-  },
-  {
-    id: "mentor-5",
-    name: "Niraj Kumar",
-    title: "Career Guidance Mentor",
-    specialty: "Academic Planning & Career Guidance",
-    experience: 3,
-    rating: 4.7,
-    reviews: 80,
-    image: "/mentors/niraj.png",
-    bio: "Guides students in planning their academic journey and choosing the right career path effectively.",
-    availability: ["Monday", "Wednesday", "Friday"],
     classes: ["Class 10", "Class 11", "Class 12"],
   },
   {
@@ -264,6 +300,19 @@ export const mentors: Mentor[] = [
     bio: "MBBS student at LBKMCH Bihar, guiding students in medical preparation and career path.",
     availability: ["Monday", "Wednesday"],
     classes: ["Class 11", "Class 12", "Dropper - NEET"],
+  },
+  {
+    id: "mentor-15",
+    name: "Niraj Kumar",
+    title: "Career Guidance Mentor",
+    specialty: "Academic Planning & Career Guidance",
+    experience: 3,
+    rating: 4.7,
+    reviews: 80,
+    image: "/mentors/niraj.png",
+    bio: "Guides students in planning their academic journey and choosing the right career path effectively.",
+    availability: ["Monday", "Wednesday", "Friday"],
+    classes: ["Class 10", "Class 11", "Class 12"],
   }
 ];
 
@@ -618,25 +667,283 @@ export const mentorTestimonials: MentorTestimonial[] = [
     impact: 'Mentored 500+ students | 95% NEET selection rate',
   },
   {
-  id: 'mentor-testimonial-2',
-  mentorName: 'Dharmveer Mahtha',
-  mentorTitle: 'Tech Mentor (Web Development & Software Engineering)',
-  yearsExperience: 4,
-  quote: "Working with Zenith's student community has strengthened my approach to teaching technology. I focus on building real-world problem-solving skills, guiding students from basic concepts to practical development, and helping them think like engineers.",
-  thought: "Technology is not just about coding — it's about solving real problems, building impactful products, and thinking logically in every situation.",
-  image: "/mentors/dharmveer.jpeg",
-  rating: 4.9,
-  impact: "Mentored 300+ students in coding & development | Helped 150+ students build real-world projects",
-},
+    id: 'mentor-testimonial-2',
+    mentorName: 'Dharmveer Mahtha',
+    mentorTitle: 'Tech Mentor (Web Development & Software Engineering)',
+    yearsExperience: 4,
+    quote: "Working with Zenith's student community has strengthened my approach to teaching technology. I focus on building real-world problem-solving skills, guiding students from basic concepts to practical development, and helping them think like engineers.",
+    thought: "Technology is not just about coding — it's about solving real problems, building impactful products, and thinking logically in every situation.",
+    image: "/mentors/dharmveer.jpeg",
+    rating: 4.9,
+    impact: "Mentored 300+ students in coding & development | Helped 150+ students build real-world projects",
+  },
   {
     id: 'mentor-testimonial-3',
-    mentorName: 'Priya Mehta',
-    mentorTitle: 'Foundation & Study Coach',
+    mentorName: 'Jhilli Meher',
+    mentorTitle: 'Foundation & Head Coach',
     yearsExperience: 6,
     quote: 'The personalized mentoring approach at Zenith allows me to understand each student\'s unique learning style and challenges. Seeing students progress from struggling with basics to confidently solving complex problems is what keeps me passionate about education.',
     thought: 'Every student has unlimited potential; they just need the right guidance, resources, and encouragement to unlock it.',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
+    image: '/mentors/jhilli.jpeg',
     rating: 4.7,
     impact: 'Mentored 300+ students | 98% board exam pass rate',
   },
 ];
+
+// 21-Day Yoga & Meditation Program
+export const yogaMeditationProgram: YogaMeditationProgram = {
+  id: 'program-yoga-21',
+  name: '21-Day Brain Focus & Discipline Mastery',
+  description: 'Transform your study habits with our scientifically-designed 21-day yoga, meditation, and discipline program. Build unbreakable focus and mental clarity.',
+  duration: 21,
+  totalDays: 21,
+  startDate: '2026-03-15',
+  currentDay: 8,
+  completedDays: 7,
+  benefits: [
+    'Improved Focus & Concentration',
+    'Better Memory Retention',
+    'Reduced Stress & Anxiety',
+    'Enhanced Brain Performance',
+    'Built Discipline & Consistency',
+    'Better Sleep Quality'
+  ],
+  overallBenefit: {
+    label: '21 Days: Improved Focus',
+    timeline: 21,
+    description: 'Significant improvement in focus, concentration, and discipline'
+  },
+  days: [
+    {
+      day: 1,
+      focus: 'Foundation: Starting Your Journey',
+      completed: true,
+      activities: [
+        { id: 'a1', name: 'Morning Sunlight Exposure', description: 'Get 10-15 minutes of direct sunlight exposure for BDNF boost', duration: 15, time: '6:30 AM', category: 'morning', benefits: ['Boosts BDNF', 'Regulates circadian rhythm', 'Improves mood'] },
+        { id: 'a2', name: 'Kapalbhati Pranayama', description: 'Breath purification technique for mental clarity', duration: 10, time: '6:50 AM', category: 'meditation', benefits: ['Clears mental fog', 'Increases oxygen', 'Boosts alertness'] },
+        { id: 'a3', name: 'Push-ups / Running', description: 'Light cardio exercise to energize body and mind', duration: 15, time: '7:10 AM', category: 'exercise', benefits: ['Increases blood flow', 'Boosts energy', 'Improves circulation'] },
+        { id: 'a4', name: 'Soaked Almonds & Egg', description: 'Brain-boosting nutrition for morning fuel', duration: 10, time: '7:30 AM', category: 'nutrition', benefits: ['Protein & omega-3s', 'Brain fuel', 'Sustained energy'] },
+      ]
+    },
+    {
+      day: 2,
+      focus: 'Building Consistency',
+      completed: true,
+      activities: [
+        { id: 'a1', name: 'Morning Sunlight Exposure', description: 'Get 10-15 minutes of direct sunlight exposure', duration: 15, time: '6:30 AM', category: 'morning', benefits: ['Boosts BDNF', 'Regulates circadian rhythm'] },
+        { id: 'a2', name: 'Anulom Vilom', description: 'Alternate nostril breathing for balance', duration: 10, time: '6:50 AM', category: 'meditation', benefits: ['Balances mind', 'Calms nerves'] },
+        { id: 'a3', name: 'Skipping Rope', description: 'Coordination and cardio exercise', duration: 15, time: '7:10 AM', category: 'exercise', benefits: ['Improves coordination', 'Boosts energy'] },
+        { id: 'a4', name: 'Banana with Walnuts', description: 'Potassium and omega-3 rich breakfast', duration: 10, time: '7:30 AM', category: 'nutrition', benefits: ['Energy & focus'] },
+      ]
+    },
+    {
+      day: 3,
+      focus: 'Enhancing Awareness',
+      completed: true,
+      activities: [
+        { id: 'a1', name: 'Morning Sunlight Exposure', description: 'Boost your BDNF levels', duration: 15, time: '6:30 AM', category: 'morning', benefits: ['Brain derived growth'] },
+        { id: 'a2', name: 'Trataka Yoga', description: 'Candle gazing for focus and third eye opening', duration: 5, time: '6:50 AM', category: 'meditation', benefits: ['Laser focus', 'Eye strength'] },
+        { id: 'a3', name: 'Push-ups & Running', description: 'Build strength and endurance', duration: 15, time: '7:10 AM', category: 'exercise', benefits: ['Strength building'] },
+        { id: 'a4', name: 'Haldi Banana Smoothie', description: 'Turmeric and potassium boost', duration: 10, time: '7:30 AM', category: 'nutrition', benefits: ['Anti-inflammatory'] },
+      ]
+    },
+    {
+      day: 4,
+      focus: 'Deepening Practice',
+      completed: true,
+      activities: [
+        { id: 'a1', name: 'Morning Meditation', description: 'Guided meditation session', duration: 15, time: '6:30 AM', category: 'meditation', benefits: ['Mental clarity'] },
+        { id: 'a2', name: 'Opposite Hand Writing', description: 'Brain cross-training activity', duration: 5, time: '6:50 AM', category: 'morning', benefits: ['Brain plasticity'] },
+        { id: 'a3', name: 'Yoga Asanas', description: 'Basic yoga poses for flexibility', duration: 20, time: '7:15 AM', category: 'exercise', benefits: ['Flexibility', 'Strength'] },
+        { id: 'a4', name: 'Almonds & Dates', description: 'Energy-packed snack', duration: 10, time: '7:45 AM', category: 'nutrition', benefits: ['Sustained energy'] },
+      ]
+    },
+    {
+      day: 5,
+      focus: 'Active Recall Practice',
+      completed: true,
+      activities: [
+        { id: 'a1', name: 'Kapalbhati', description: 'Energizing breath work', duration: 10, time: '6:30 AM', category: 'meditation', benefits: ['Mental energy'] },
+        { id: 'a2', name: 'Trataka', description: 'Concentration building', duration: 5, time: '6:45 AM', category: 'meditation', benefits: ['Deep focus'] },
+        { id: 'a3', name: 'Cardio Exercise', description: 'Running or cycling', duration: 20, time: '7:10 AM', category: 'exercise', benefits: ['Cardiovascular health'] },
+        { id: 'a4', name: 'Protein-Rich Breakfast', description: 'Eggs with toast and vegetables', duration: 15, time: '7:40 AM', category: 'nutrition', benefits: ['Muscle & brain fuel'] },
+      ]
+    },
+    {
+      day: 6,
+      focus: 'Spaced Repetition Foundation',
+      completed: true,
+      activities: [
+        { id: 'a1', name: 'Meditation', description: 'Calm mind meditation', duration: 10, time: '6:30 AM', category: 'meditation', benefits: ['Peace'] },
+        { id: 'a2', name: 'Anulom Vilom', description: 'Breathing balance', duration: 10, time: '6:45 AM', category: 'meditation', benefits: ['Equilibrium'] },
+        { id: 'a3', name: 'Strength Training', description: 'Push-ups and bodyweight exercises', duration: 20, time: '7:10 AM', category: 'exercise', benefits: ['Core strength'] },
+        { id: 'a4', name: 'Fresh Fruits & Nuts', description: 'Seasonal fruits and roasted chana', duration: 10, time: '7:40 AM', category: 'nutrition', benefits: ['Vitamins & minerals'] },
+      ]
+    },
+    {
+      day: 7,
+      focus: 'Weekly Deep Study Preparation',
+      completed: true,
+      activities: [
+        { id: 'a1', name: 'Extended Meditation', description: 'Deeper meditation practice', duration: 15, time: '6:30 AM', category: 'meditation', benefits: ['Mental strength'] },
+        { id: 'a2', name: 'Trataka & Language Practice', description: 'Combined focus and language session', duration: 10, time: '6:50 AM', category: 'morning', benefits: ['Dual benefit'] },
+        { id: 'a3', name: 'Full Body Yoga', description: 'Complete yoga sequence', duration: 30, time: '7:10 AM', category: 'exercise', benefits: ['Holistic fitness'] },
+        { id: 'a4', name: 'Nutritious Brunch', description: 'Power-packed breakfast for deep study day', duration: 15, time: '7:50 AM', category: 'nutrition', benefits: ['Day fuel'] },
+      ]
+    },
+    {
+      day: 8,
+      focus: 'Day 8: Strengthening Habits',
+      completed: false,
+      activities: [
+        { id: 'a1', name: 'Morning Routine', description: 'Complete morning ritual', duration: 45, time: '6:30 AM', category: 'morning', benefits: ['Habit building'] },
+        { id: 'a2', name: 'Advanced Pranayama', description: 'Breath work for mental clarity', duration: 10, time: '6:50 AM', category: 'meditation', benefits: ['Deep focus'] },
+        { id: 'a3', name: 'Exercise Routine', description: 'Mixed cardio and strength', duration: 20, time: '7:15 AM', category: 'exercise', benefits: ['Total fitness'] },
+        { id: 'a4', name: 'Brain Foods', description: 'Omega-3 and protein-rich meal', duration: 15, time: '7:45 AM', category: 'nutrition', benefits: ['Brain power'] },
+      ]
+    },
+    {
+      day: 9,
+      focus: 'Deep Focus Activation',
+      completed: false,
+      activities: [
+        { id: 'a1', name: 'Sunlight + Hydration', description: 'Morning activation routine', duration: 15, time: '6:30 AM', category: 'morning', benefits: ['Wakefulness'] },
+        { id: 'a2', name: 'Box Breathing', description: '4-4-4-4 breathing for calm focus', duration: 10, time: '6:50 AM', category: 'meditation', benefits: ['Focus control'] },
+        { id: 'a3', name: 'HIIT Workout', description: 'Short intense workout', duration: 20, time: '7:10 AM', category: 'exercise', benefits: ['Energy spike'] },
+        { id: 'a4', name: 'Protein Breakfast', description: 'Eggs + nuts', duration: 15, time: '7:40 AM', category: 'nutrition', benefits: ['Brain fuel'] },
+      ]
+    },
+    {
+      day: 10,
+      focus: 'Attention Control Training',
+      completed: false,
+      activities: [
+        { id: 'a1', name: 'Morning Routine', description: 'Sunlight + stretch', duration: 15, time: '6:30 AM', category: 'morning', benefits: ['Routine lock'] },
+        { id: 'a2', name: 'Trataka Advanced', description: 'Candle focus training', duration: 10, time: '6:50 AM', category: 'meditation', benefits: ['Laser focus'] },
+        { id: 'a3', name: 'Core Workout', description: 'Abs + posture training', duration: 20, time: '7:10 AM', category: 'exercise', benefits: ['Posture'] },
+        { id: 'a4', name: 'Fruit + Nuts Bowl', description: 'Light brain nutrition', duration: 10, time: '7:40 AM', category: 'nutrition', benefits: ['Light energy'] },
+      ]
+    },
+    {
+      day: 11,
+      focus: 'Cognitive Strength Building',
+      completed: false,
+      activities: [
+        { id: 'a1', name: 'Morning Walk', description: 'Outdoor movement', duration: 20, time: '6:30 AM', category: 'morning', benefits: ['Mental clarity'] },
+        { id: 'a2', name: 'Meditation', description: 'Silent awareness', duration: 10, time: '6:55 AM', category: 'meditation', benefits: ['Awareness'] },
+        { id: 'a3', name: 'Strength Training', description: 'Push + pull routine', duration: 25, time: '7:15 AM', category: 'exercise', benefits: ['Strength'] },
+        { id: 'a4', name: 'Protein Meal', description: 'Balanced breakfast', duration: 15, time: '7:50 AM', category: 'nutrition', benefits: ['Sustain energy'] },
+      ]
+    },
+    {
+      day: 12,
+      focus: 'Mental Endurance Phase',
+      completed: false,
+      activities: [
+        { id: 'a1', name: 'Sunlight Routine', description: 'Circadian sync', duration: 15, time: '6:30 AM', category: 'morning', benefits: ['Sleep cycle'] },
+        { id: 'a2', name: 'Breath Hold Practice', description: 'CO2 tolerance training', duration: 10, time: '6:50 AM', category: 'meditation', benefits: ['Focus endurance'] },
+        { id: 'a3', name: 'Jogging', description: 'Steady cardio', duration: 25, time: '7:10 AM', category: 'exercise', benefits: ['Endurance'] },
+        { id: 'a4', name: 'Oats + Nuts', description: 'Slow-release carbs', duration: 15, time: '7:45 AM', category: 'nutrition', benefits: ['Sustained energy'] },
+      ]
+    },
+    {
+      day: 13,
+      focus: 'Distraction Resistance Training',
+      completed: false,
+      activities: [
+        { id: 'a1', name: 'Morning Silence', description: 'No phone first 30 min', duration: 30, time: '6:30 AM', category: 'morning', benefits: ['Dopamine reset'] },
+        { id: 'a2', name: 'Mindfulness Meditation', description: 'Observe thoughts', duration: 10, time: '7:00 AM', category: 'meditation', benefits: ['Control mind'] },
+        { id: 'a3', name: 'Bodyweight Training', description: 'Push-ups + squats', duration: 20, time: '7:15 AM', category: 'exercise', benefits: ['Discipline'] },
+        { id: 'a4', name: 'Simple Breakfast', description: 'Light and clean', duration: 10, time: '7:40 AM', category: 'nutrition', benefits: ['Clarity'] },
+      ]
+    },
+    {
+      day: 14,
+      focus: 'Weekly Mastery Integration',
+      completed: false,
+      activities: [
+        { id: 'a1', name: 'Extended Meditation', description: 'Deep calm session', duration: 20, time: '6:30 AM', category: 'meditation', benefits: ['Inner stability'] },
+        { id: 'a2', name: 'Visualization Practice', description: 'Goal visualization', duration: 10, time: '7:00 AM', category: 'meditation', benefits: ['Motivation'] },
+        { id: 'a3', name: 'Full Body Workout', description: 'Complete routine', duration: 30, time: '7:15 AM', category: 'exercise', benefits: ['Full fitness'] },
+        { id: 'a4', name: 'Balanced Meal', description: 'Complete nutrition', duration: 15, time: '7:50 AM', category: 'nutrition', benefits: ['Recovery'] },
+      ]
+    },
+    {
+      day: 15,
+      focus: 'Peak Focus Phase Begins',
+      completed: false,
+      activities: [
+        { id: 'a1', name: 'Morning Activation', description: 'Routine start', duration: 15, time: '6:30 AM', category: 'morning', benefits: ['Alertness'] },
+        { id: 'a2', name: 'Advanced Meditation', description: 'Deep stillness', duration: 15, time: '6:50 AM', category: 'meditation', benefits: ['Sharp mind'] },
+        { id: 'a3', name: 'Strength + Cardio', description: 'Hybrid workout', duration: 25, time: '7:15 AM', category: 'exercise', benefits: ['Peak energy'] },
+        { id: 'a4', name: 'Protein Meal', description: 'High protein breakfast', duration: 15, time: '7:45 AM', category: 'nutrition', benefits: ['Muscle + brain'] },
+      ]
+    },
+    {
+      day: 16,
+      focus: 'Cognitive Peak Training',
+      completed: false,
+      activities: [
+        { id: 'a1', name: 'Morning Walk', description: 'Outdoor clarity', duration: 20, time: '6:30 AM', category: 'morning', benefits: ['Fresh mind'] },
+        { id: 'a2', name: 'Breath Control', description: 'Advanced pranayama', duration: 10, time: '6:55 AM', category: 'meditation', benefits: ['Control'] },
+        { id: 'a3', name: 'Workout', description: 'Full routine', duration: 25, time: '7:15 AM', category: 'exercise', benefits: ['Strength'] },
+        { id: 'a4', name: 'Healthy Meal', description: 'Balanced nutrition', duration: 15, time: '7:45 AM', category: 'nutrition', benefits: ['Recovery'] },
+      ]
+    },
+    {
+      day: 17,
+      focus: 'Memory Optimization Phase',
+      completed: false,
+      activities: [
+        { id: 'a1', name: 'Sunlight Routine', description: 'Morning sync', duration: 15, time: '6:30 AM', category: 'morning', benefits: ['Circadian'] },
+        { id: 'a2', name: 'Visualization', description: 'Memory training', duration: 10, time: '6:50 AM', category: 'meditation', benefits: ['Recall'] },
+        { id: 'a3', name: 'Exercise', description: 'Cardio + strength', duration: 25, time: '7:15 AM', category: 'exercise', benefits: ['Blood flow'] },
+        { id: 'a4', name: 'Brain Food', description: 'Omega rich meal', duration: 15, time: '7:45 AM', category: 'nutrition', benefits: ['Memory boost'] },
+      ]
+    },
+    {
+      day: 18,
+      focus: 'Discipline Lock Phase',
+      completed: false,
+      activities: [
+        { id: 'a1', name: 'No Phone Morning', description: 'Zero distraction start', duration: 30, time: '6:30 AM', category: 'morning', benefits: ['Focus'] },
+        { id: 'a2', name: 'Meditation', description: 'Stillness training', duration: 15, time: '7:00 AM', category: 'meditation', benefits: ['Control'] },
+        { id: 'a3', name: 'Workout', description: 'Strength routine', duration: 25, time: '7:20 AM', category: 'exercise', benefits: ['Discipline'] },
+        { id: 'a4', name: 'Simple Meal', description: 'Clean eating', duration: 10, time: '7:50 AM', category: 'nutrition', benefits: ['Clarity'] },
+      ]
+    },
+    {
+      day: 19,
+      focus: 'High Performance Mode',
+      completed: false,
+      activities: [
+        { id: 'a1', name: 'Morning Routine', description: 'Full activation', duration: 20, time: '6:30 AM', category: 'morning', benefits: ['Energy'] },
+        { id: 'a2', name: 'Meditation', description: 'Deep awareness', duration: 15, time: '6:55 AM', category: 'meditation', benefits: ['Sharp focus'] },
+        { id: 'a3', name: 'Workout', description: 'High intensity', duration: 30, time: '7:15 AM', category: 'exercise', benefits: ['Peak state'] },
+        { id: 'a4', name: 'Balanced Diet', description: 'Full nutrition', duration: 15, time: '7:50 AM', category: 'nutrition', benefits: ['Recovery'] },
+      ]
+    },
+    {
+      day: 20,
+      focus: 'Mastery Consolidation',
+      completed: false,
+      activities: [
+        { id: 'a1', name: 'Morning Silence', description: 'Mind reset', duration: 20, time: '6:30 AM', category: 'morning', benefits: ['Clarity'] },
+        { id: 'a2', name: 'Meditation', description: 'Stillness mastery', duration: 15, time: '6:55 AM', category: 'meditation', benefits: ['Mastery'] },
+        { id: 'a3', name: 'Workout', description: 'Balanced training', duration: 25, time: '7:15 AM', category: 'exercise', benefits: ['Consistency'] },
+        { id: 'a4', name: 'Clean Meal', description: 'Healthy nutrition', duration: 15, time: '7:45 AM', category: 'nutrition', benefits: ['Sustainability'] },
+      ]
+    },
+    {
+      day: 21,
+      focus: 'Topper Mindset Achieved',
+      completed: false,
+      activities: [
+        { id: 'a1', name: 'Reflection + Gratitude', description: 'Review journey', duration: 20, time: '6:30 AM', category: 'morning', benefits: ['Awareness'] },
+        { id: 'a2', name: 'Meditation', description: 'Final deep session', duration: 20, time: '7:00 AM', category: 'meditation', benefits: ['Calm power'] },
+        { id: 'a3', name: 'Light Workout', description: 'Recovery movement', duration: 20, time: '7:25 AM', category: 'exercise', benefits: ['Balance'] },
+        { id: 'a4', name: 'Celebration Meal', description: 'Reward yourself', duration: 20, time: '7:50 AM', category: 'nutrition', benefits: ['Motivation'] },
+      ]
+    }
+  ]
+};

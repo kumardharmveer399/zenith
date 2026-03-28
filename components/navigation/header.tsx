@@ -110,7 +110,7 @@ export function Header() {
           </nav>
 
           {/* Desktop Buttons */}
-          <div className="hidden lg:flex items-center gap-3">
+          {/* <div className="hidden lg:flex items-center gap-3">
 
             {currentUser ? (
               <>
@@ -146,7 +146,7 @@ export function Header() {
               </>
             )}
 
-          </div>
+          </div> */}
 
           {/* Mobile Menu Button */}
           <button

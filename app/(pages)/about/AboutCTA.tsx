@@ -33,7 +33,7 @@ export default function AboutCTA() {
 
             {/* WhatsApp */}
             <motion.a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/919905990681"
               target="_blank"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -50,7 +50,7 @@ export default function AboutCTA() {
 
       {/* Floating WhatsApp */}
       <a
-        href="https://wa.me/919876543210"
+        href="https://wa.me/919905990681"
         target="_blank"
         className="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-xl hover:scale-110 transition"
       >

@@ -6,7 +6,7 @@ import { CTASection } from '@/components/home/cta-section'
 import { TestimonialsSection } from '@/components/home/testimonials-section'
 
 import { MentorTestimonialsSection } from '@/components/home/mentor-testimonials-section'
-
+import { YogaMeditationTrackerInsane } from '@/components/home/yoga-meditation-tracker'
 
 export default function Home() {
   return (
@@ -15,6 +15,7 @@ export default function Home() {
       <FeaturesSection />
       <CoursesPreview />
       <MentorsSection />
+      <YogaMeditationTrackerInsane />
       <MentorTestimonialsSection />
       <TestimonialsSection />
       <CTASection />
