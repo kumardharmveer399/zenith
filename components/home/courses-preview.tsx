@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { CourseCard } from '@/components/shared/course-card';
 
 // ✅ Google Meet Link
-const DAILY_MEET_LINK = "https://meet.google.com/abc-defg-hij";
-
+const DAILY_MEET_LINK = "https://meet.google.com/ynh-eube-kcb"
 // ✅ Session Config
 const liveSession = {
   title: "Daily NEET Doubt Session",
