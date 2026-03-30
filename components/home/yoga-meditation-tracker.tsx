@@ -226,10 +226,10 @@ export function YogaMeditationTrackerInsane() {
                   {a.description}
                 </p>
 
-                <div className="flex gap-4 text-xs text-muted-foreground">
+                {/* <div className="flex gap-4 text-xs text-muted-foreground">
                   <span>⏱ {a.duration}m</span>
                   <span>🕐 {a.time}</span>
-                </div>
+                </div> */}
 
                 <div className="flex flex-wrap gap-2 mt-3">
                   {a.benefits.map((b, i) => (

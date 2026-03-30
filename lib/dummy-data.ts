@@ -120,7 +120,7 @@ export interface YogaMeditationProgram {
 export const mentors: Mentor[] = [
   {
     id: "mentor-1",
-    name: "Chunchun Mahtha",
+    name: "Chunchun",
     title: "Director and Lead Mentor",
     specialty: "Medical & Concept Clarity",
     experience: 3,
@@ -634,7 +634,7 @@ export const testimonials: Testimonial[] = [
     achievement: '95% in Science | Secured Admission in DU',
     quote: 'Zenith\'s structured approach to board exam preparation gave me the confidence I needed. The regular mock tests, doubt-clearing sessions, and mentor support helped me score exceptionally well. Priya Mehta\'s mentorship was like having a personal guide.',
     thought: 'Believe in yourself and your preparation. Success follows naturally when you\'re consistent.',
-    image: 'https://images.unsplash.com/photo-1517849845537-1d51a20414de?w=400&h=400&fit=crop',
+    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
     rating: 5,
     category: 'NEET',
   },

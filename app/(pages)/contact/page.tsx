@@ -1,316 +1,248 @@
 'use client'
 
-import type { Metadata } from 'next'
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Clock } from 'lucide-react'
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
-  })
   const [submitted, setSubmitted] = useState(false)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
-    // Form validation (basic)
-    if (!formData.fullName || !formData.email || !formData.message) {
-      alert('Please fill in all required fields')
-      return
+    const form = e.target
+    const data = new FormData(form)
+
+    const res = await fetch("https://formspree.io/f/xvzvawbg", {
+      method: "POST",
+      body: data,
+      headers: { Accept: "application/json" }
+    })
+
+    if (res.ok) {
+      setSubmitted(true)
+      form.reset()
+      setTimeout(() => setSubmitted(false), 4000)
     }
-    // Here you would normally send the data to an API endpoint
-    console.log('Form submitted:', formData)
-    setSubmitted(true)
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setFormData({ fullName: '', email: '', phone: '', subject: '', message: '' })
-      setSubmitted(false)
-    }, 3000)
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
-      <section className="py-16 sm:py-20 bg-gradient-to-b from-primary/5 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl sm:text-6xl font-bold text-primary mb-6">
-              Get in Touch
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              Have questions? We'd love to hear from you. Reach out to us through any of the channels below.
-            </p>
-          </div>
-        </div>
+    <div className="min-h-screen relative overflow-hidden">
+
+      {/* 🌈 SOFT BACKGROUND BLOBS */}
+      <div className="absolute top-[-100px] left-[-100px] w-[400px] h-[400px] bg-purple-200/40 blur-[120px]" />
+      <div className="absolute bottom-[-100px] right-[-100px] w-[400px] h-[400px] bg-blue-200/40 blur-[120px]" />
+
+      {/* HERO */}
+      <section className="text-center py-24 px-6">
+        <motion.img
+          src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png"
+          className="w-28 mx-auto mb-6 drop-shadow-xl"
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+        />
+
+        <motion.h1
+          className="text-5xl md:text-6xl font-bold text-gray-800"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          Let’s build something great
+        </motion.h1>
+
+        <p className="text-gray-500 mt-4 max-w-xl mx-auto text-lg">
+          Have a question or idea? We’d love to hear from you.
+        </p>
       </section>
 
-      {/* Contact Info & Form */}
-      <section className="py-16 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Contact Information */}
-            <div className="lg:col-span-1 space-y-10">
+      {/* MAIN */}
+      <section className="max-w-7xl mx-auto px-6 pb-20">
+        <div className="grid lg:grid-cols-3 gap-10">
 
-              {/* Team Contacts */}
-              <div className="space-y-6">
+          {/* LEFT SIDE */}
+          <div className="space-y-8">
 
-                <h3 className="text-xl font-bold text-primary">
-                  Contact Our Team
-                </h3>
+            {/* 👤 TEAM CARDS */}
+            {[
+              {
+                role: "Director",
+                name: "Dr. Chunchun",
+                email: "owner@zenithinstitute.com",
+                color: "from-purple-400 to-indigo-400",
+                img: "/mentors/chunchun.jpeg"
+              },
+              {
+                role: "Technical Head",
+                name: "Dharmveer Mahtha",
+                email: "kumardharmveer399@gmail.com",
+                color: "from-blue-400 to-indigo-400",
+                img: "/mentors/dharmveer.jpeg"
+              }
+            ].map((person, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.2 }}
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="relative rounded-3xl p-[1px] bg-gradient-to-br from-white/60 to-white/20 shadow-lg"
+              >
+                <div className="rounded-3xl bg-white/80 backdrop-blur-xl p-6 relative overflow-hidden">
 
-                {/* Owner */}
-                <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-xl">
+                  {/* Glow */}
+                  <div className={`absolute inset-0 opacity-20 bg-gradient-to-br ${person.color} blur-2xl`} />
 
-                  <div className="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">
-                    O
+                  <div className="relative z-10 flex items-center gap-4">
+                    <motion.img
+                      src={person.img}
+                      className="w-14 h-14 rounded-full shadow-md"
+                      whileHover={{ rotate: 5, scale: 1.1 }}
+                    />
+
+                    <div>
+                      <h3 className="text-sm text-gray-500">{person.role}</h3>
+                      <p className="text-lg font-semibold text-gray-800">
+                        {person.name}
+                      </p>
+                    </div>
                   </div>
 
-                  <div>
-                    <p className="font-semibold text-foreground">Director</p>
-                    <p className="text-sm text-muted-foreground">Dr. Chunchun</p>
-
-                    <div className="flex items-center gap-2 text-sm mt-1">
-                      <Phone className="w-4 h-4 text-secondary" />
-                      <a href="tel:+919905990681" className="hover:text-primary">
-                        +91 9905990681
-                      </a>
+                  <div className="mt-4 space-y-2 text-sm text-gray-600 relative z-10">
+                    <div className="flex items-center gap-2 hover:translate-x-1 transition">
+                      <Phone size={16} /> +91 9905990681
                     </div>
 
-                    <div className="flex items-center gap-2 text-sm">
-                      <Mail className="w-4 h-4 text-secondary" />
-                      <a href="mailto:owner@zenithinstitute.com" className="hover:text-primary">
-                        owner@zenithinstitute.com
-                      </a>
+                    <div className="flex items-center gap-2 hover:translate-x-1 transition">
+                      <Mail size={16} /> {person.email}
                     </div>
-
                   </div>
+
+                </div>
+              </motion.div>
+            ))}
+
+            {/* 📍 LOCATION */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -5 }}
+              className="rounded-3xl p-[1px] bg-gradient-to-br from-indigo-200 to-purple-200"
+            >
+              <div className="rounded-3xl bg-white/80 backdrop-blur-xl p-6 space-y-3 text-gray-600">
+                <div className="flex items-center gap-2 hover:translate-x-1 transition">
+                  <MapPin size={16} /> Deoghar, Jharkhand, India
                 </div>
 
-                {/* Tech Lead */}
-                <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-xl">
-
-                  <div className="w-14 h-14 rounded-full bg-secondary text-white flex items-center justify-center font-bold text-lg">
-                    T
-                  </div>
-
-                  <div>
-                    <p className="font-semibold text-foreground">Technical Head</p>
-                    <p className="text-sm text-muted-foreground">Dharmveer Mahtha</p>
-
-                    <div className="flex items-center gap-2 text-sm mt-1">
-                      <Phone className="w-4 h-4 text-secondary" />
-                      <a href="tel:+919905990681" className="hover:text-primary">
-                        +91 9905990681
-                      </a>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-sm">
-                      <Mail className="w-4 h-4 text-secondary" />
-                      <a href="mailto:kumardharmveer399@gmail.com" className="hover:text-primary">
-                        kumardharmveer399@gmail.com
-                      </a>
-                    </div>
-
-                  </div>
+                <div className="flex items-center gap-2 hover:translate-x-1 transition">
+                  <Clock size={16} /> Mon - Sat: 9AM - 6PM
                 </div>
-
               </div>
+            </motion.div>
 
-              {/* Institute Address */}
-              <div className="space-y-6">
+          </div>
 
-                <div className="flex gap-4">
-                  <MapPin className="w-6 h-6 text-secondary mt-1" />
-                  <div>
-                    <h3 className="font-bold text-foreground">Institute Address</h3>
-                    <p className="text-muted-foreground">
-                      Deoghar, Jharkhand 814112<br />
-                      India
-                    </p>
-                  </div>
+          {/* RIGHT SIDE - FORM */}
+          <motion.div
+            className="lg:col-span-2 rounded-3xl p-10 bg-white/70 backdrop-blur-2xl shadow-xl border border-white/50"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+          >
+            <form onSubmit={handleSubmit} className="space-y-6">
+
+              {submitted ? (
+                <div className="text-center py-16">
+                  <h3 className="text-3xl font-bold text-green-500">
+                    Message Sent 🎉
+                  </h3>
+                  <p className="text-gray-500 mt-2">
+                    We’ll get back to you soon.
+                  </p>
                 </div>
-
-                <div className="flex gap-4">
-                  <Clock className="w-6 h-6 text-secondary mt-1" />
-                  <div>
-                    <h3 className="font-bold text-foreground">Business Hours</h3>
-                    <p className="text-muted-foreground">
-                      Mon - Fri: 9:00 AM - 6:00 PM<br />
-                      Sat: 10:00 AM - 4:00 PM
-                    </p>
+              ) : (
+                <>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <FloatingInput name="fullName" label="Full Name" />
+                    <FloatingInput name="email" label="Email" type="email" />
                   </div>
-                </div>
 
-              </div>
+                  <FloatingInput name="phone" label="Phone" />
 
-            </div>
+                  <FloatingSelect name="subject" label="Subject" />
 
-            {/* Contact Form */}
-            <div className="lg:col-span-2">
-              <form onSubmit={handleSubmit} className="bg-blue-50 p-8 rounded-xl space-y-6">
-                {submitted ? (
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
-                    <h3 className="text-xl font-bold text-green-800 mb-2">Thank You!</h3>
-                    <p className="text-green-700">We've received your message and will get back to you soon.</p>
-                  </div>
-                ) : (
-                  <>
-                    {/* Full Name */}
-                    <div>
-                      <label className="block text-sm font-semibold text-foreground mb-2">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white"
-                        placeholder="Enter your full name"
-                        required
-                      />
-                    </div>
+                  <FloatingTextarea name="message" label="Message" />
 
-                    {/* Email */}
-                    <div>
-                      <label className="block text-sm font-semibold text-foreground mb-2">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white"
-                        placeholder="your@email.com"
-                        required
-                      />
-                    </div>
-
-                    {/* Phone */}
-                    <div>
-                      <label className="block text-sm font-semibold text-foreground mb-2">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white"
-                        placeholder="+91 98765 43210"
-                      />
-                    </div>
-
-                    {/* Subject */}
-                    <div>
-                      <label className="block text-sm font-semibold text-foreground mb-2">
-                        Subject *
-                      </label>
-                      <select
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white"
-                        required
-                      >
-                        <option value="">Select a subject</option>
-                        <option value="course">Course Inquiry</option>
-                        <option value="mentorship">Mentorship Program</option>
-                        <option value="general">General Inquiry</option>
-                        <option value="feedback">Feedback</option>
-                      </select>
-                    </div>
-
-                    {/* Message */}
-                    <div>
-                      <label className="block text-sm font-semibold text-foreground mb-2">
-                        Message *
-                      </label>
-                      <textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        rows={6}
-                        className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white resize-none"
-                        placeholder="Please share your message or inquiry..."
-                        required
-                      />
-                    </div>
-
-                    {/* Submit Button */}
-                    <button
-                      type="submit"
-                      className="w-full bg-secondary text-white py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors"
-                    >
-                      Send Message
-                    </button>
-                  </>
-                )}
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Google Map Location */}
-      <section className="py-16 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-primary">
-              Find Us on Map
-            </h2>
-            <p className="text-muted-foreground mt-2">
-              Visit Zenith Institute at our campus location.
-            </p>
-          </div>
-
-          <div className="w-full h-[450px] rounded-xl overflow-hidden shadow-lg">
-
-            <iframe
-              src="https://www.google.com/maps?q=Deoghar,Jharkhand,India&output=embed"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-
-          </div>
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.96 }}
+                    className="w-full py-3 rounded-xl font-semibold text-white 
+                    bg-gradient-to-r from-indigo-500 to-purple-500 shadow-lg"
+                  >
+                    Send Message 🚀
+                  </motion.button>
+                </>
+              )}
+            </form>
+          </motion.div>
 
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section className="py-16 sm:py-20 bg-blue-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold text-primary mb-6">
-            Stay Updated
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8">
-            Subscribe to our newsletter for tips, updates, and exclusive offers.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-6 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-white"
-            />
-            <button className="bg-secondary text-white px-8 py-3 rounded-lg font-semibold hover:bg-secondary/90 transition-colors">
-              Subscribe
-            </button>
-          </div>
+      {/* MAP */}
+      <section className="px-6 pb-20">
+        <div className="max-w-7xl mx-auto rounded-3xl overflow-hidden shadow-xl">
+          <iframe
+            src="https://www.google.com/maps?q=Deoghar,Jharkhand,India&output=embed"
+            className="w-full h-[400px]"
+          />
         </div>
       </section>
+
+    </div>
+  )
+}
+
+/* INPUT */
+function FloatingInput({ name, label, type = "text" }: any) {
+  return (
+    <div className="relative">
+      <input
+        name={name}
+        type={type}
+        required
+        placeholder=" "
+        className="floating-input peer"
+      />
+      <label className="floating-label">{label}</label>
+    </div>
+  )
+}
+
+/* SELECT */
+function FloatingSelect({ name, label }: any) {
+  return (
+    <div className="relative">
+      <select name={name} required className="floating-input peer">
+        <option value=""></option>
+        <option value="course">Course Inquiry</option>
+        <option value="mentorship">Mentorship</option>
+        <option value="general">General</option>
+      </select>
+      <label className="floating-label">{label}</label>
+    </div>
+  )
+}
+
+/* TEXTAREA */
+function FloatingTextarea({ name, label }: any) {
+  return (
+    <div className="relative">
+      <textarea
+        name={name}
+        rows={5}
+        required
+        placeholder=" "
+        className="floating-input peer resize-none"
+      />
+      <label className="floating-label">{label}</label>
     </div>
   )
 }

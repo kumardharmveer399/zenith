@@ -10,8 +10,8 @@ const DAILY_MEET_LINK = "https://meet.google.com/ynh-eube-kcb"
 const liveSession = {
   title: "Daily NEET Doubt Session",
   mentor: "Jhilli Meher",
-  time: "19:00", // 6 AM (change to 18:00 for 6 PM)
-  duration: 60,
+  time: "05:00", // 5 AM (change to 18:00 for 6 PM)
+  duration: 120,
 };
 
 export function CoursesPreview() {

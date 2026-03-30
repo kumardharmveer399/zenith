@@ -147,20 +147,20 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <Phone className="w-4 h-4 mt-1 flex-shrink-0 text-white/70" />
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+918228867070"
                   className="text-white/80 hover:text-white transition"
                 >
-                  +91 9905990681
+                  +91 8228867070
                 </a>
               </li>
 
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 mt-1 flex-shrink-0 text-white/70" />
                 <a
-                  href="mailto:info@zenith.edu"
+                  href="mailto:zenithinstitute123@gmail.com"
                   className="text-white/80 hover:text-white transition"
                 >
-                  kumardharmveer399@gmail.com
+                  zenithinstitute123@gmail.com
                 </a>
               </li>
 
