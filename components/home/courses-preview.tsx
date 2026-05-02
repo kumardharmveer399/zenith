@@ -8,7 +8,7 @@ import { CourseCard } from '@/components/shared/course-card';
 const DAILY_MEET_LINK = "https://meet.google.com/ynh-eube-kcb"
 // ✅ Session Config
 const liveSession = {
-  title: "Daily NEET Doubt Session",
+  title: "Daily Doubt Session",
   mentor: "Jhilli Meher",
   time: "05:00", // 5 AM (change to 18:00 for 6 PM)
   duration: 120,

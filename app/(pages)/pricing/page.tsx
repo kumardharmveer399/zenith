@@ -9,260 +9,245 @@ export default function PricingPage() {
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'annual'>('monthly');
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="py-16 sm:py-20 bg-gradient-to-b from-primary/5 to-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl sm:text-6xl font-bold text-primary mb-6">
-              Simple, Transparent Pricing
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-              Choose the perfect plan for your learning journey. Upgrade or downgrade anytime.
-            </p>
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
 
-            {/* Billing Toggle */}
-            <div className="flex items-center justify-center gap-4">
-              <button
-                onClick={() => setBillingPeriod('monthly')}
-                className={`px-6 py-2 rounded-lg font-semibold transition-all ${
-                  billingPeriod === 'monthly'
-                    ? 'bg-primary text-white'
-                    : 'bg-white border border-border text-foreground hover:bg-muted'
-                }`}
-              >
-                Monthly
-              </button>
-              <button
-                onClick={() => setBillingPeriod('annual')}
-                className={`px-6 py-2 rounded-lg font-semibold transition-all ${
-                  billingPeriod === 'annual'
-                    ? 'bg-primary text-white'
-                    : 'bg-white border border-border text-foreground hover:bg-muted'
-                }`}
-              >
-                Annual
-                <span className="ml-2 text-xs bg-secondary text-white px-2 py-1 rounded-full">Save 17%</span>
-              </button>
-            </div>
+      {/* HERO */}
+      <section className="py-20 text-center">
+        <h1 className="text-5xl font-bold text-primary mb-4">
+          Simple Pricing
+        </h1>
+        <p className="text-muted-foreground mb-8">
+          Choose a plan that fits your learning journey
+        </p>
+
+        {/* MODERN TOGGLE */}
+        <div className="flex justify-center">
+          <div className="relative flex bg-muted p-1 rounded-full w-[260px]">
+            
+            <div
+              className={`absolute top-1 bottom-1 w-1/2 rounded-full bg-primary transition-all duration-300 ${
+                billingPeriod === 'monthly' ? 'left-1' : 'left-[50%]'
+              }`}
+            />
+
+            <button
+              onClick={() => setBillingPeriod('monthly')}
+              className={`w-1/2 z-10 py-2 text-sm font-semibold ${
+                billingPeriod === 'monthly' ? 'text-white' : 'text-muted-foreground'
+              }`}
+            >
+              Monthly
+            </button>
+
+            <button
+              onClick={() => setBillingPeriod('annual')}
+              className={`w-1/2 z-10 py-2 text-sm font-semibold ${
+                billingPeriod === 'annual' ? 'text-white' : 'text-muted-foreground'
+              }`}
+            >
+              Annual
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Pricing Cards */}
-      <section className="py-16 sm:py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pricingPlans.map((plan) => (
+      {/* PRICING */}
+      <section className="py-16">
+        <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto px-4">
+
+          {pricingPlans.map((plan) => (
+            <div
+              key={plan.id}
+              className={`relative rounded-3xl p-[2px] transition-all duration-300 hover:-translate-y-2 ${
+                plan.highlighted
+                  ? 'bg-gradient-to-r from-primary to-purple-500'
+                  : 'bg-border'
+              }`}
+            >
               <div
-                key={plan.id}
-                className={`relative rounded-2xl overflow-hidden transition-all ${
+                className={`rounded-3xl p-8 h-full transition-all duration-300 ${
                   plan.highlighted
-                    ? 'md:scale-105 bg-gradient-to-br from-primary to-primary/80 text-white shadow-2xl'
-                    : 'bg-white border border-border'
+                    ? 'bg-gradient-to-br from-primary to-primary/80 text-white shadow-2xl'
+                    : 'bg-white hover:shadow-xl'
                 }`}
               >
-                {/* Recommended Badge */}
+                {/* Badge */}
                 {plan.highlighted && (
-                  <div className="absolute top-0 right-0 bg-secondary text-white px-4 py-1 text-xs font-bold rounded-bl-lg">
+                  <span className="absolute top-4 right-4 text-xs bg-white text-primary px-3 py-1 rounded-full font-semibold animate-pulse">
                     MOST POPULAR
-                  </div>
+                  </span>
                 )}
 
-                <div className="p-8">
-                  {/* Plan Header */}
-                  <h3 className={`text-2xl font-bold mb-2 ${plan.highlighted ? 'text-white' : 'text-foreground'}`}>
-                    {plan.name}
-                  </h3>
-                  <p className={plan.highlighted ? 'text-white/80 mb-6' : 'text-muted-foreground mb-6'}>
-                    {plan.description}
-                  </p>
+                {/* Title */}
+                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                <p className="mb-6 opacity-80">{plan.description}</p>
 
-                  {/* Price */}
-                  <div className="mb-6">
-                    <div className="flex items-baseline gap-2 mb-2">
-                      <span className={`text-5xl font-bold ${plan.highlighted ? 'text-white' : 'text-primary'}`}>
-                        ₹{billingPeriod === 'monthly' ? plan.price : Math.floor(plan.annualPrice! / 12)}
-                      </span>
-                      <span className={plan.highlighted ? 'text-white/80' : 'text-muted-foreground'}>
-                        /month
-                      </span>
-                    </div>
-                    {billingPeriod === 'annual' && (
-                      <p className={`text-sm ${plan.highlighted ? 'text-white/80' : 'text-muted-foreground'}`}>
-                        Billed ₹{plan.annualPrice} annually
-                      </p>
-                    )}
-                  </div>
-
-                  {/* CTA Button */}
-                  <Button
-                    className={`w-full mb-8 font-semibold py-3 rounded-lg ${
-                      plan.highlighted
-                        ? 'bg-white text-primary hover:bg-white/90'
-                        : 'bg-primary text-white hover:bg-primary/90'
-                    }`}
+                {/* PRICE */}
+                <div className="mb-6">
+                  <div
+                    key={billingPeriod}
+                    className="text-5xl font-bold transition-all duration-300"
                   >
-                    Get Started
-                  </Button>
-
-                  {/* Features */}
-                  <div className="space-y-4">
-                    <p className={`font-semibold text-sm ${plan.highlighted ? 'text-white' : 'text-foreground'}`}>
-                      What's included:
-                    </p>
-                    <ul className="space-y-3">
-                      {plan.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-3">
-                          <Check className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
-                            plan.highlighted ? 'text-white' : 'text-primary'
-                          }`} />
-                          <span className={plan.highlighted ? 'text-white/90' : 'text-muted-foreground'}>
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
+                    ₹
+                    {billingPeriod === 'monthly'
+                      ? plan.offerPrice ?? plan.price
+                      : Math.floor((plan.annualPrice ?? 0) / 12)}
+                    <span className="text-lg"> /month</span>
                   </div>
 
-                  {/* Classes Info */}
-                  <div className={`mt-8 pt-8 border-t ${plan.highlighted ? 'border-white/20' : 'border-border'}`}>
-                    <p className={`text-xs font-semibold mb-3 ${plan.highlighted ? 'text-white/80' : 'text-muted-foreground'}`}>
-                      Best for these grades:
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {plan.classes.map((cls, idx) => (
-                        <span
-                          key={idx}
-                          className={`text-xs px-3 py-1 rounded-full ${
-                            plan.highlighted
-                              ? 'bg-white/20 text-white'
-                              : 'bg-primary/10 text-primary'
-                          }`}
-                        >
-                          {cls}
-                        </span>
-                      ))}
+                  {/* strike */}
+                  {plan.offerPrice && billingPeriod === 'monthly' && (
+                    <div className="line-through text-sm opacity-70">
+                      ₹{plan.price}
                     </div>
+                  )}
+
+                  {/* annual */}
+                  {billingPeriod === 'annual' && (
+                    <div className="text-sm opacity-70">
+                      ₹{plan.annualPrice} billed yearly
+                    </div>
+                  )}
+
+                  {/* offer badge */}
+                  {plan.offerPrice && (
+                    <span className="inline-block mt-2 text-xs bg-green-500 text-white px-2 py-1 rounded">
+                      LIMITED OFFER
+                    </span>
+                  )}
+                </div>
+
+                {/* BUTTON */}
+                <Button
+                  className={`w-full mb-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 active:scale-95 ${
+                    plan.highlighted
+                      ? 'bg-white text-primary hover:bg-white/90'
+                      : 'bg-primary text-white hover:bg-primary/90'
+                  }`}
+                >
+                  Get Started
+                </Button>
+
+                {/* FEATURES */}
+                <ul className="space-y-3">
+                  {plan.features.map((f, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-3 transition-all duration-300 hover:translate-x-1"
+                    >
+                      <Check size={18} />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* CLASSES */}
+                <div className="mt-8">
+                  <p className="text-sm mb-2 opacity-80">Best for:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {plan.classes.map((c, i) => (
+                      <span
+                        key={i}
+                        className="text-xs px-3 py-1 rounded-full bg-primary/10 text-primary"
+                      >
+                        {c}
+                      </span>
+                    ))}
                   </div>
                 </div>
+
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Comparison Section */}
-      <section className="py-16 sm:py-20 bg-white border-y border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-foreground text-center mb-12">
-            Feature Comparison
-          </h2>
+      {/* COMPARISON */}
+      <section className="py-16 bg-white border-y">
+        <h2 className="text-3xl font-bold text-center mb-10">
+          Feature Comparison
+        </h2>
 
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left py-4 px-4 font-semibold text-foreground">Feature</th>
-                  {pricingPlans.map(plan => (
-                    <th key={plan.id} className="text-center py-4 px-4 font-semibold text-foreground">
-                      {plan.name}
-                    </th>
+        <div className="overflow-x-auto max-w-5xl mx-auto px-4">
+          <table className="w-full border rounded-xl overflow-hidden">
+            <thead className="bg-muted">
+              <tr>
+                <th className="p-4 text-left">Feature</th>
+                {pricingPlans.map(plan => (
+                  <th key={plan.id} className="p-4 text-center">
+                    {plan.name}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+
+            <tbody>
+              {[
+                ['Live Classes', [false, true]],
+                ['Recorded Classes', [true, true]],
+                ['Mentor Support', [false, true]],
+                ['Test Series', [false, true]],
+              ].map((row, i) => (
+                <tr key={i} className="border-t">
+                  <td className="p-4">{row[0]}</td>
+                  {row[1].map((val: any, idx: number) => (
+                    <td key={idx} className="text-center">
+                      {val ? (
+                        <Check className="mx-auto text-green-500" />
+                      ) : (
+                        <X className="mx-auto text-red-500" />
+                      )}
+                    </td>
                   ))}
                 </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-border">
-                  <td className="py-4 px-4 text-foreground">Live Classes</td>
-                  <td className="text-center py-4 px-4"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                </tr>
-                <tr className="border-b border-border bg-muted/50">
-                  <td className="py-4 px-4 text-foreground">Recorded Classes</td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                </tr>
-                <tr className="border-b border-border">
-                  <td className="py-4 px-4 text-foreground">1-on-1 Sessions</td>
-                  <td className="text-center py-4 px-4"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                </tr>
-                <tr className="border-b border-border bg-muted/50">
-                  <td className="py-4 px-4 text-foreground">Personal Mentor</td>
-                  <td className="text-center py-4 px-4"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                </tr>
-                <tr className="border-b border-border">
-                  <td className="py-4 px-4 text-foreground">24/7 Support</td>
-                  <td className="text-center py-4 px-4"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                </tr>
-                <tr className="bg-muted/50">
-                  <td className="py-4 px-4 text-foreground">Lifetime Access</td>
-                  <td className="text-center py-4 px-4"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><X className="w-5 h-5 text-red-500 mx-auto" /></td>
-                  <td className="text-center py-4 px-4"><Check className="w-5 h-5 text-green-500 mx-auto" /></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 sm:py-20 bg-background">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-foreground text-center mb-12">
-            Frequently Asked Questions
-          </h2>
+      {/* FAQ (UNCHANGED + slight animation) */}
+      <section className="py-16">
+        <h2 className="text-3xl font-bold text-center mb-10">
+          Frequently Asked Questions
+        </h2>
 
-          <div className="space-y-6">
-            {[
-              {
-                q: 'Can I change my plan anytime?',
-                a: 'Yes, you can upgrade or downgrade your plan anytime. Changes take effect at the next billing cycle.'
-              },
-              {
-                q: 'Do you offer a refund policy?',
-                a: 'We offer a 7-day money-back guarantee if you are not satisfied with our courses.'
-              },
-              {
-                q: 'Are there any hidden charges?',
-                a: 'No, the price you see is the price you pay. There are no hidden charges or surprise fees.'
-              },
-              {
-                q: 'Do you offer discounts for annual subscriptions?',
-                a: 'Yes, we offer 17% discount on annual subscriptions compared to monthly pricing.'
-              },
-            ].map((item, idx) => (
-              <div key={idx} className="bg-white border border-border rounded-lg p-6">
-                <h3 className="font-semibold text-foreground mb-2">{item.q}</h3>
-                <p className="text-muted-foreground">{item.a}</p>
-              </div>
-            ))}
-          </div>
+        <div className="max-w-3xl mx-auto space-y-6 px-4">
+          {[
+            {
+              q: 'Can I change my plan anytime?',
+              a: 'Yes, you can upgrade or downgrade anytime.'
+            },
+            {
+              q: 'Do you offer refund?',
+              a: 'Yes, 7-day money back guarantee.'
+            },
+            {
+              q: 'Hidden charges?',
+              a: 'No hidden fees at all.'
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="p-6 border rounded-xl bg-white transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+            >
+              <h3 className="font-semibold mb-2">{item.q}</h3>
+              <p className="text-muted-foreground">{item.a}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 sm:py-20 bg-gradient-to-r from-primary to-primary/80">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            Ready to Start Learning?
-          </h2>
-          <p className="text-lg text-white/90 mb-8">
-            Join thousands of students already learning with Zenith Institute
-          </p>
-          <Button className="bg-white text-primary hover:bg-white/90 px-8 py-4 text-lg font-semibold rounded-lg">
-            Get Started Now
-          </Button>
-        </div>
+      {/* CTA */}
+      <section className="py-20 text-center bg-gradient-to-r from-primary to-purple-500 text-white">
+        <h2 className="text-4xl font-bold mb-4">
+          Start Learning Today 🚀
+        </h2>
+        <Button className="bg-white text-primary hover:bg-white/90 px-8 py-4">
+          Get Started
+        </Button>
       </section>
+
     </div>
   );
 }

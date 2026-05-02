@@ -26,7 +26,7 @@ export function CTASection() {
   };
 
   const stats = [
-    { end: 500, label: "Students Mentored", suffix: "+" },
+    { end: 2000, label: "Students Mentored", suffix: "+" },
     { end: 4.7, label: "Avg Rating", suffix: "", decimals: 1 },
     { end: 100, label: "Success Rate", suffix: "%" }
   ];

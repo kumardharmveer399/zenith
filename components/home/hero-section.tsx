@@ -58,7 +58,7 @@ export function HeroSection() {
                   sequence={[
                     "With Expert Mentors",
                     2000,
-                    "With IIT Mentors",
+                    "With NEET Mentors",
                     2000,
                     "With Career Experts",
                     2000,
@@ -122,8 +122,8 @@ export function HeroSection() {
               className="flex items-center gap-4 sm:gap-6 lg:gap-8 text-sm text-muted-foreground"
             >
               {[
-                { end: 10000, label: "Students Guided", suffix: "+" },
-                { end: 50, label: "Expert Mentors", suffix: "+" },
+                { end: 2000, label: "Students Guided", suffix: "+" },
+                { end: 25, label: "Expert Mentors", suffix: "+" },
                 { end: 95, label: "Success Rate", suffix: "%" }
               ].map((item, index) => (
                 <motion.div 
