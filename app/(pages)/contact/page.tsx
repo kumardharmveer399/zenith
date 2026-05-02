@@ -37,7 +37,7 @@ export default function ContactPage() {
     {
       role: "Technical Head",
       name: "Dharmveer Mahtha",
-      phones: ["+919204927674"],
+      phones: ["+919905990681"],
       email: "kumardharmveer399@gmail.com",
       img: "/mentors/dharmveer.jpeg"
     },
