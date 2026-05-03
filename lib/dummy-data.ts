@@ -134,6 +134,21 @@ export const mentors: Mentor[] = [
     availability: ["Monday", "Wednesday", "Friday"],
     classes: ["Class 11", "Class 12"],
   },
+
+  {
+    id: "mentor-2",
+    name: "Abhishek Kumar",
+    title: "Research Scholar",
+    specialty: "Research & Concept Clarity",
+    experience: 3,
+    rating: 4.9,
+    reviews: 120,
+    image: "/mentors/abhishek.png",
+    bio: "Research scholar guiding students in concept clarity, scientific thinking, and advanced problem-solving approaches.",
+    availability: ["Monday", "Wednesday", "Friday"],
+    classes: ["Class 10", "Class 11", "Class 12"],
+  },
+
   // {
   //   id: "mentor-2",
   //   name: "Amit Kumar Dubey",
