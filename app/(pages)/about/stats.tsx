@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function Stats() {
 
   const stats = [
-    { end: 10000, label: "Students Mentored", suffix: "+" },
+    { end: 2000, label: "Students Mentored", suffix: "+" },
     { end: 50, label: "Expert Mentors", suffix: "+" },
     { end: 15, label: "Courses Offered", suffix: "+" },
     { end: 100, label: "Success Rate", suffix: "%" }

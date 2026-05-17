@@ -70,7 +70,7 @@ export default function AboutPage() {
               {
                 icon: Award,
                 title: 'Proven Results',
-                description: '500+ students mentored with 100% success rate in competitive examinations'
+                description: '2000+ students mentored with 100% success rate in competitive examinations'
               },
               {
                 icon: CheckCircle,
